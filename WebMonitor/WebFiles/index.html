@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Baby Monitor - Web Access</title>
+    <link href="node_modules/video.js/dist/video-js.css" rel="stylesheet">
+    <script src="bower_components/jquery/dist/jquery.min.js"></script>
+    <style>
+        body {
+            font-family: arial;
+            font-size: 14px;
+            padding: 0;
+            margin: 0;
+        }
+
+        .tempBanner {
+            background-color: teal;
+            color: white;
+            font-size: 16px;
+            margin-top: 10px;
+            padding: 11px;
+        }
+
+        .tempBannerInner {
+            margin-left: auto;
+            margin-right: auto;
+            max-width: 900px;
+        }
+
+        #currentTemp {
+            font-size: 32px;
+        }
+    </style>
+
+    <script>
+        var lastHtml = null;
+        var _showBlinkingPingText = false;
+        function doRefresh() {
+            if (_showBlinkingPingText === true) {
+                $("#ping").fadeOut(function () {
+                    $(this).fadeIn();
+                });
+            }
+
+            var cachebuster = Math.round(new Date().getTime() / 1000);
+            $.get("temp.html?date=" + cachebuster, function (data) {
+                if (data != lastHtml) {
+                    $("#currentTemp").fadeOut(function () {
+                        $("#currentTemp").html(data);
+                        $("#currentTemp").fadeIn();
+                    });
+                } else {
+                    $("#currentTemp").html(data);
+                }
+
+                lastHtml = data;
+            });
+
+            setTimeout(doRefresh, 10000);
+        }
+
+        doRefresh();
+    </script>
+</head>
+<body>
+<div class="tempBanner">
+    <div class="tempBannerInner">
+        <div>Current Temperature</div>
+        <div id="currentTemp"></div>
+    </div>
+
+</div>
+
+<video id="my-video" class="video-js" controls preload="auto" width="800" height="480"
+       poster="MY_VIDEO_POSTER.jpg" data-setup="{}">
+    <source src="/hls/c1stream.m3u8" type="application/x-mpegURL">
+    <p class="vjs-no-js">
+        To view this video please enable JavaScript, and consider upgrading to a web browser that
+        <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
+    </p>
+</video>
+
+<script src="node_modules/video.js/dist/video.js"></script>
+<script src="node_modules/videojs-contrib-hls/dist/videojs-contrib-hls.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,6 @@
+<ASX version ="3.0">
+  <TITLE>Ch01 - Driveway</TITLE>
+  <ENTRY>
+    <REF HREF="rtsp://bc-dvr-01:554/?user=admin&password=&channel=1&stream=0.sdp" />
+  </ENTRY>
+</ASX>

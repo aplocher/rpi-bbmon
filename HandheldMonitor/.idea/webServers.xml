@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="ssh://pi@bc-bbcam-01:22/usr/bin/python" name="ssh://pi@bc-bbcam-01:22/usr/bin/python">
+        <fileTransfer host="bc-bbcam-01" port="22" accessType="SFTP">
+          <option name="port" value="22" />
+        </fileTransfer>
+      </webServer>
+      <webServer id="8325ad1d-b8a2-4904-ab2c-22efc7aa881f" name="ssh://pi@bc-camrcv-01:22/usr/bin/python">
+        <fileTransfer host="bc-camrcv-01" port="22" accessType="SFTP">
+          <option name="port" value="22" />
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>
